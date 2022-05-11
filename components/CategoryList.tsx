@@ -20,7 +20,7 @@ interface ItemProps {
 }
 const CategoryList = ({ title, image }: ItemProps) => {
   return (
-    <TouchableOpacity>
+    <TouchableOpacity activeOpacity={0.5}>
       <View style={styles.container}>
         <Text style={styles.title}>{title}</Text>
         <Image source={image} style={styles.categoryImg} />

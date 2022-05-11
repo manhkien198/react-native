@@ -1,56 +1,63 @@
-import React from "react";
-import {
-  Image,
-  View,
-  Text,
-  StyleSheet,
-  ViewStyle,
-  TextStyle,
-  ImageStyle,
-  TouchableOpacity,
-} from "react-native";
-interface Styles {
-  container: ViewStyle;
-  title: TextStyle;
-  categoryImg: ImageStyle;
-}
-interface ItemProps {
+import { StyleSheet } from "react-native";
+import Meds from "../assets/meds.png";
+import Soap from "../assets/soap.png";
+import Shampoo from "../assets/shampoo.png";
+import Food from "../assets/diet.png";
+import Clothes from "../assets/fashion.png";
+import { FlatList } from "react-native-gesture-handler";
+import CategoryList from "../components/CategoryList";
+interface Category {
+  id: number;
   title: string;
   image: HTMLImageElement;
 }
-const Categories = ({ title, image }: ItemProps) => {
+
+const Categories = () => {
+  const category: Category[] = [
+    {
+      id: 0,
+      title: "Thực phẩm chức năng",
+      image: Meds,
+    },
+    {
+      id: 1,
+      title: "Sữa tắm",
+      image: Soap,
+    },
+    {
+      id: 2,
+      title: "Dầu gội",
+      image: Shampoo,
+    },
+    {
+      id: 3,
+      title: "Thực phẩm",
+      image: Food,
+    },
+    {
+      id: 4,
+      title: "Quần áo",
+      image: Clothes,
+    },
+  ];
   return (
-    <TouchableOpacity>
-      <View style={styles.container}>
-        <Text style={styles.title}>{title}</Text>
-        <Image source={image} style={styles.categoryImg} />
-      </View>
-    </TouchableOpacity>
+    <FlatList
+      data={category}
+      renderItem={({ item }) => (
+        <CategoryList title={item.title} image={item.image} />
+      )}
+      keyExtractor={(item) => `${item.id}`}
+      contentContainerStyle={{ paddingLeft: 16, paddingRight: 16 }}
+    />
   );
 };
 export default Categories;
 
-const styles = StyleSheet.create<Styles>({
-  container: {
-    alignItems: "center",
-    backgroundColor: "#fff",
-    padding: 20,
-    // borderRadius: 4,
-    // borderWidth: 1,
-    // borderStyle: "solid",
-    shadowColor: "#000",
-    shadowOpacity: 0.1,
-    shadowRadius: 10,
-    shadowOffset: { width: 1, height: 1 },
-    marginBottom: 20,
-  },
-  title: {
-    fontSize: 24,
-    marginBottom: 20,
-    fontWeight: "700",
-  },
-  categoryImg: {
-    width: 64,
-    height: 64,
-  },
-});
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     backgroundColor: "#fff",
+//     alignItems: "stretch",
+//     justifyContent: "center",
+//   },
+// });
