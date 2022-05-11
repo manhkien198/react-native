@@ -38,7 +38,7 @@ const styles = StyleSheet.create<Styles>({
     shadowColor: "#000",
     shadowOpacity: 0.1,
     shadowRadius: 10,
-    shadowOffset: { width: 0, height: 0 },
+    shadowOffset: { width: 1, height: 1 },
     marginBottom: 20,
   },
   title: {
