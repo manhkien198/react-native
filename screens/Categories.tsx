@@ -18,7 +18,7 @@ interface ItemProps {
   title: string;
   image: HTMLImageElement;
 }
-const CategoryList = ({ title, image }: ItemProps) => {
+const Categories = ({ title, image }: ItemProps) => {
   return (
     <TouchableOpacity>
       <View style={styles.container}>
@@ -28,7 +28,7 @@ const CategoryList = ({ title, image }: ItemProps) => {
     </TouchableOpacity>
   );
 };
-export default CategoryList;
+export default Categories;
 
 const styles = StyleSheet.create<Styles>({
   container: {
