@@ -1,15 +1,17 @@
 import { StyleSheet } from "react-native";
-import Meds from "../assets/meds.png";
-import Soap from "../assets/soap.png";
-import Shampoo from "../assets/shampoo.png";
-import Food from "../assets/diet.png";
-import Clothes from "../assets/fashion.png";
+import Worker from "../assets/worker.png";
+import Living from "../assets/relax.png";
+import Kitchen from "../assets/kitchen.png";
+import Dining from "../assets/dinner-table.png";
+import Bedroom from "../assets/bedroom.png";
+import Baby from "../assets/baby-boy.png";
 import { FlatList } from "react-native-gesture-handler";
 import CategoryList from "../components/CategoryList";
 interface Category {
   id: number;
   title: string;
   image: HTMLImageElement;
+  category: string;
 }
 
 const Categories = (props: any) => {
@@ -17,28 +19,39 @@ const Categories = (props: any) => {
   const category: Category[] = [
     {
       id: 0,
-      title: "Thực phẩm chức năng",
-      image: Meds,
+      title: "Office",
+      image: Worker,
+      category: "office",
     },
     {
       id: 1,
-      title: "Sữa tắm",
-      image: Soap,
+      title: "Living Room",
+      image: Living,
+      category: "living room",
     },
     {
       id: 2,
-      title: "Dầu gội",
-      image: Shampoo,
+      title: "Kitchen",
+      image: Kitchen,
+      category: "kitchen",
     },
     {
       id: 3,
-      title: "Thực phẩm",
-      image: Food,
+      title: "Bedroom",
+      image: Bedroom,
+      category: "bedroom",
     },
     {
       id: 4,
-      title: "Quần áo",
-      image: Clothes,
+      title: "Dining",
+      image: Dining,
+      category: "dining",
+    },
+    {
+      id: 5,
+      title: "Kids",
+      image: Baby,
+      category: "kids",
     },
   ];
   return (
@@ -48,11 +61,12 @@ const Categories = (props: any) => {
         <CategoryList
           title={item.title}
           image={item.image}
-          onPress={() =>
+          onPress={() => {
             navigation.navigate("Category", {
               categoryName: item.title,
-            })
-          }
+              type: item.category,
+            });
+          }}
         />
       )}
       keyExtractor={(item) => `${item.id}`}

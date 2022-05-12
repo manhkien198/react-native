@@ -15,7 +15,9 @@ export default function App() {
         <Stack.Screen
           name="Category"
           component={Category}
-          options={({ route }) => ({ title: route.params.categoryName })}
+          options={({ route }) => ({
+            title: route?.params?.categoryName || "Category",
+          })}
         />
       </Stack.Navigator>
     </NavigationContainer>
