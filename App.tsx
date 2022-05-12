@@ -11,8 +11,12 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Category" component={Category} />
-        <Stack.Screen name="Categories" component={Categories} />
+        <Stack.Screen name="Home" component={Categories} />
+        <Stack.Screen
+          name="Category"
+          component={Category}
+          options={({ route }) => ({ title: route.params.categoryName })}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

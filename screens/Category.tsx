@@ -1,7 +1,12 @@
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 
-export default function App() {
-  return <View style={styles.container}></View>;
+export default function Category({ route, navigation }: any) {
+  const { categoryName } = route.params;
+  return (
+    <View style={styles.container}>
+      <Text>Category</Text>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({

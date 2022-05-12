@@ -1,13 +1,14 @@
 import React from "react";
 import {
   Image,
-  View,
-  Text,
-  StyleSheet,
-  ViewStyle,
-  TextStyle,
   ImageStyle,
+  NativeTouchEvent,
+  StyleSheet,
+  Text,
+  TextStyle,
   TouchableOpacity,
+  View,
+  ViewStyle,
 } from "react-native";
 interface Styles {
   container: ViewStyle;
@@ -17,10 +18,11 @@ interface Styles {
 interface ItemProps {
   title: string;
   image: HTMLImageElement;
+  onPress: any;
 }
-const CategoryList = ({ title, image }: ItemProps) => {
+const CategoryList = ({ title, image, onPress }: ItemProps) => {
   return (
-    <TouchableOpacity activeOpacity={0.5}>
+    <TouchableOpacity activeOpacity={0.5} onPress={onPress}>
       <View style={styles.container}>
         <Text style={styles.title}>{title}</Text>
         <Image source={image} style={styles.categoryImg} />
@@ -35,13 +37,11 @@ const styles = StyleSheet.create<Styles>({
     alignItems: "center",
     backgroundColor: "#fff",
     padding: 20,
-    // borderRadius: 4,
-    // borderWidth: 1,
-    // borderStyle: "solid",
+    borderRadius: 4,
     shadowColor: "#000",
-    shadowOpacity: 0.1,
+    shadowOpacity: 0.2,
     shadowRadius: 10,
-    shadowOffset: { width: 1, height: 1 },
+    shadowOffset: { width: 0, height: 0 },
     marginBottom: 20,
   },
   title: {

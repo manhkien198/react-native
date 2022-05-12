@@ -12,7 +12,8 @@ interface Category {
   image: HTMLImageElement;
 }
 
-const Categories = () => {
+const Categories = (props: any) => {
+  const { navigation } = props;
   const category: Category[] = [
     {
       id: 0,
@@ -44,7 +45,15 @@ const Categories = () => {
     <FlatList
       data={category}
       renderItem={({ item }) => (
-        <CategoryList title={item.title} image={item.image} />
+        <CategoryList
+          title={item.title}
+          image={item.image}
+          onPress={() =>
+            navigation.navigate("Category", {
+              categoryName: item.title,
+            })
+          }
+        />
       )}
       keyExtractor={(item) => `${item.id}`}
       contentContainerStyle={{ paddingLeft: 16, paddingRight: 16 }}
@@ -52,12 +61,3 @@ const Categories = () => {
   );
 };
 export default Categories;
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: "#fff",
-//     alignItems: "stretch",
-//     justifyContent: "center",
-//   },
-// });
