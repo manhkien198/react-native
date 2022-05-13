@@ -26,15 +26,15 @@ const GlobalState = ({ children }: any) => {
       setProducts(rest);
     } else {
       target[0].quantity -= 1;
-      setProducts([...rest, ...target]);
+      setProducts([...target, ...rest]);
     }
   };
   const increaseToCart = (product: Product) => {
     const target = products.filter((x) => x.id === product.id);
     const rest = products.filter((x) => x.id !== product.id);
     setProducts([
-      ...rest,
       { ...target[0], quantity: (target[0].quantity += 1) },
+      ...rest,
     ]);
   };
   const removeFromCart = (id: string) => {
