@@ -2,8 +2,8 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { FlatList, StyleSheet, View } from "react-native";
 import ProductsList from "../components/ProductsList";
-
-interface Product {
+import Context from "../context";
+export interface Product {
   id: string;
   name: string;
   price: number;
@@ -13,18 +13,21 @@ interface Product {
   description: string;
   category: string;
   shipping: boolean;
+  quantity: number;
 }
 
-export default function Category({ route }: any) {
+export default function Category({ route, navigation }: any) {
   const { type } = route.params;
   const [data, setData] = useState([]);
   useEffect(() => {
     axios
       .get("https://course-api.com/react-store-products")
-      .then((res) => setData(res.data))
+      .then((res) =>
+        setData(res.data?.map((x: Product) => ({ ...x, quantity: 1 })))
+      )
       .catch((e) => console.log(e));
   }, []);
-  const onAddToCard = () => {};
+  const { products, addToCart } = React.useContext(Context);
   return (
     <FlatList
       data={data.filter((x: Product) => x.category === type)}
@@ -35,7 +38,7 @@ export default function Category({ route }: any) {
             title={item.name}
             image={item.image}
             price={item.price}
-            onAddToCard={onAddToCard}
+            addToCard={() => addToCart(item)}
           />
         </View>
       )}

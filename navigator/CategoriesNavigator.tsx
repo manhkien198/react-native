@@ -5,15 +5,11 @@ import { StyleSheet } from "react-native";
 import "react-native-gesture-handler";
 import Categories from "../screens/Categories";
 import Category from "../screens/Category";
-export default function AppNavigator() {
+export default function CategoriesNavigator() {
   const Stack = createStackNavigator();
   return (
-    <Stack.Navigator
-      screenOptions={{
-        headerShown: false,
-      }}
-    >
-      <Stack.Screen name="Categories" component={Categories} />
+    <Stack.Navigator>
+      <Stack.Screen name="Home" component={Categories} />
       <Stack.Screen
         name="Category"
         component={Category}

@@ -15,14 +15,15 @@ interface Styles {
   categoryImg: ImageStyle;
   priceRow: ViewStyle;
   price: TextStyle;
+  buy: TextStyle;
 }
 interface ItemProps {
   title: string;
   image: HTMLImageElement;
   price: string;
-  onAddToCard: Function;
+  AddToCard: Function;
 }
-const ProductsList = ({ title, image, price, onAddToCard }: ItemProps) => {
+const ProductsList = ({ title, image, price, addToCard }: ItemProps) => {
   return (
     <TouchableOpacity activeOpacity={0.5}>
       <View style={styles.container}>
@@ -30,8 +31,8 @@ const ProductsList = ({ title, image, price, onAddToCard }: ItemProps) => {
         <Text style={styles.title}>{title}</Text>
         <View style={styles.priceRow}>
           <Text style={styles.price}>{price}K</Text>
-          <TouchableOpacity onPress={onAddToCard}>
-            <Text>Mua +</Text>
+          <TouchableOpacity onPress={addToCard}>
+            <Text style={styles.buy}>Mua +</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -70,5 +71,8 @@ const styles = StyleSheet.create<Styles>({
   price: {
     flex: 1,
     opacity: 0.7,
+  },
+  buy: {
+    color: "#3f6600",
   },
 });

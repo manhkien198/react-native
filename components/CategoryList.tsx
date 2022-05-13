@@ -42,7 +42,7 @@ const styles = StyleSheet.create<Styles>({
     shadowOpacity: 0.2,
     shadowRadius: 10,
     shadowOffset: { width: 0, height: 0 },
-    marginBottom: 20,
+    marginTop: 20,
   },
   title: {
     fontSize: 24,
