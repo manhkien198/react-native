@@ -1,11 +1,28 @@
 import * as React from "react";
-import { Text } from "react-native";
+import { FlatList, View } from "react-native";
+import OrderList from "../components/OrderList";
 import Context from "../context";
-export interface OrderProps {}
-
-export default function Order(props: OrderProps) {
-  const { products } = React.useContext(Context);
-  console.log("products :", products);
-
-  return <Text>Order</Text>;
+export default function Order() {
+  const { order } = React.useContext(Context);
+  return (
+    <FlatList
+      data={order}
+      renderItem={({ item }: any) => (
+        <View>
+          <OrderList
+            title={item.name}
+            image={item.image}
+            price={item.price}
+            quantity={item.quantity}
+          />
+        </View>
+      )}
+      keyExtractor={(item: any) => item.id}
+      contentContainerStyle={{
+        paddingHorizontal: 8,
+        paddingTop: 20,
+        paddingBottom: 30,
+      }}
+    />
+  );
 }

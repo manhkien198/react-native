@@ -4,6 +4,8 @@ import { Product } from "./screens/Category";
 
 const GlobalState = ({ children }: any) => {
   const [products, setProducts] = useState<Array<Product>>([]);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [order, setOrder] = useState([]);
   const addToCart = (product: Product) => {
     for (let i = 0; i < products.length; i++) {
       const x = products[i];
@@ -48,6 +50,10 @@ const GlobalState = ({ children }: any) => {
         removeFromCart,
         decreaseToCart,
         increaseToCart,
+        isAuthenticated,
+        setIsAuthenticated,
+        order: order,
+        setOrder,
       }}
     >
       {children}

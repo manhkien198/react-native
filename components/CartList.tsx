@@ -1,4 +1,4 @@
-import React from "react";
+import React, { EventHandler } from "react";
 import {
   Image,
   ImageStyle,
@@ -25,10 +25,10 @@ interface ItemProps {
   title: string;
   image: HTMLImageElement;
   price: string;
-  removeFromCart: Function;
+  removeFromCart: EventHandler<any>;
   quantity: number;
-  decreaseToCart: Function;
-  increaseToCart: Function;
+  decreaseToCart: EventHandler<any>;
+  increaseToCart: EventHandler<any>;
 }
 const CartList = ({
   title,
@@ -40,34 +40,36 @@ const CartList = ({
   increaseToCart,
 }: ItemProps) => {
   return (
-    <View style={styles.container}>
-      <View style={styles.main}>
-        <Image source={{ uri: image }} style={styles.categoryImg} />
-        <Text style={styles.title}>{title}</Text>
-        <View style={styles.priceRow}>
-          <Text style={styles.price}>{price}K</Text>
-          <View style={styles.wrapper}>
-            <TouchableOpacity onPress={decreaseToCart}>
-              <View style={styles.decrease}>
-                <Text>-</Text>
-              </View>
-            </TouchableOpacity>
-            <Text>{quantity}</Text>
-            <TouchableOpacity onPress={increaseToCart}>
-              <View style={styles.increase}>
-                <Text>+</Text>
-              </View>
-            </TouchableOpacity>
+    <View>
+      <View style={styles.container}>
+        <View style={styles.main}>
+          <Image source={{ uri: `${image}` }} style={styles.categoryImg} />
+          <Text style={styles.title}>{title}</Text>
+          <View style={styles.priceRow}>
+            <Text style={styles.price}>{price}K</Text>
+            <View style={styles.wrapper}>
+              <TouchableOpacity onPress={decreaseToCart}>
+                <View style={styles.decrease}>
+                  <Text>-</Text>
+                </View>
+              </TouchableOpacity>
+              <Text>{quantity}</Text>
+              <TouchableOpacity onPress={increaseToCart}>
+                <View style={styles.increase}>
+                  <Text>+</Text>
+                </View>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
+        <TouchableOpacity
+          style={styles.remove}
+          activeOpacity={0.5}
+          onPress={removeFromCart}
+        >
+          <Text>X</Text>
+        </TouchableOpacity>
       </View>
-      <TouchableOpacity
-        style={styles.remove}
-        activeOpacity={0.5}
-        onPress={removeFromCart}
-      >
-        <Text>X</Text>
-      </TouchableOpacity>
     </View>
   );
 };
@@ -75,7 +77,6 @@ export default CartList;
 
 const styles = StyleSheet.create<Styles>({
   container: {
-    alignItems: "start",
     backgroundColor: "#fff",
     padding: 20,
     borderRadius: 4,
@@ -86,6 +87,7 @@ const styles = StyleSheet.create<Styles>({
     marginBottom: 20,
     flexDirection: "row",
   },
+
   main: {
     flex: 1,
   },
@@ -131,5 +133,8 @@ const styles = StyleSheet.create<Styles>({
     padding: 5,
     paddingHorizontal: 8,
     borderRadius: 50,
+    position: "absolute",
+    top: 10,
+    right: 20,
   },
 });

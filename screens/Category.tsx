@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { FlatList, StyleSheet, View } from "react-native";
+import { Alert, FlatList, StyleSheet, View } from "react-native";
 import ProductsList from "../components/ProductsList";
 import Context from "../context";
 export interface Product {
@@ -38,12 +38,21 @@ export default function Category({ route, navigation }: any) {
             title={item.name}
             image={item.image}
             price={item.price}
-            addToCard={() => addToCart(item)}
+            addToCard={() => {
+              addToCart(item);
+              Alert.alert(
+                "Thành công",
+                `Bạn đã thêm ${item.name} vào giỏ hàng`
+              );
+            }}
           />
         </View>
       )}
       keyExtractor={(item: any) => item.id}
-      contentContainerStyle={{ paddingHorizontal: 8, paddingTop: 20 }}
+      contentContainerStyle={{
+        paddingHorizontal: 8,
+        paddingTop: 20,
+      }}
     />
   );
 }

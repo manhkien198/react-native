@@ -1,4 +1,4 @@
-import React from "react";
+import React, { EventHandler } from "react";
 import {
   Image,
   ImageStyle,
@@ -21,13 +21,13 @@ interface ItemProps {
   title: string;
   image: HTMLImageElement;
   price: string;
-  AddToCard: Function;
+  addToCard: EventHandler<any>;
 }
 const ProductsList = ({ title, image, price, addToCard }: ItemProps) => {
   return (
     <TouchableOpacity activeOpacity={0.5}>
       <View style={styles.container}>
-        <Image source={{ uri: image }} style={styles.categoryImg} />
+        <Image source={{ uri: `${image}` }} style={styles.categoryImg} />
         <Text style={styles.title}>{title}</Text>
         <View style={styles.priceRow}>
           <Text style={styles.price}>{price}K</Text>
