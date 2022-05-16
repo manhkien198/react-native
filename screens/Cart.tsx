@@ -60,7 +60,7 @@ export default function Cart({ navigation }: any) {
           />
         </View>
       ) : (
-        ""
+        <Text></Text>
       )}
     </View>
   );

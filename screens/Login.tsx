@@ -5,6 +5,7 @@ import {
   Button,
   SafeAreaView,
   StyleSheet,
+  Text,
   TextInput,
   View,
 } from "react-native";
@@ -12,13 +13,24 @@ import Context from "../context";
 
 import axiosClient from "../api/axiosClient";
 import MyButton from "../components/Button";
+import * as yup from "yup";
+
 interface ValueForm {
   email: string;
   password: string;
 }
 export default function Login({ navigation }: any) {
   const { products, setIsAuthenticated } = React.useContext(Context);
-
+  const loginValidationSchema = yup.object().shape({
+    email: yup
+      .string()
+      .email("Please enter valid email")
+      .required("Email Address is Required"),
+    password: yup
+      .string()
+      .min(8, ({ min }) => `Password must be at least ${min} characters`)
+      .required("Password is required"),
+  });
   const handleSubmit = (value: ValueForm) => {
     axiosClient
       .post("/auth/login", value)
@@ -27,7 +39,7 @@ export default function Login({ navigation }: any) {
   };
   return (
     <Formik initialValues={{ email: "", password: "" }} onSubmit={handleSubmit}>
-      {({ handleChange, handleSubmit, values }) => (
+      {({ handleChange, handleSubmit, values, errors, isValid }) => (
         <SafeAreaView style={styles.container}>
           <TextInput
             style={styles.input}
@@ -37,6 +49,7 @@ export default function Login({ navigation }: any) {
             autoCapitalize="none"
             placeholder="Enter Email"
           />
+          {errors.email && <Text style={styles.errorText}>{errors.email}</Text>}
           <TextInput
             style={styles.input}
             onChangeText={handleChange("password")}
@@ -45,6 +58,9 @@ export default function Login({ navigation }: any) {
             autoCapitalize="none"
             placeholder="Enter Password"
           />
+          {errors.password && (
+            <Text style={styles.errorText}>{errors.password}</Text>
+          )}
           <View style={styles.button}>
             <MyButton onPress={handleSubmit} title="Sign in" />
             <Button
@@ -76,5 +92,9 @@ const styles = StyleSheet.create({
     margin: 12,
     borderWidth: 1,
     padding: 10,
+  },
+  errorText: {
+    fontSize: 10,
+    color: "red",
   },
 });
