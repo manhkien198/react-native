@@ -12,8 +12,7 @@ import Setting from "./screens/Setting";
 
 export default function NavigationWrapper() {
   const Tab = createBottomTabNavigator();
-  const { products, isAuthenticated } = React.useContext(Context);
-
+  const { products, isAuthenticated, order } = React.useContext(Context);
   return (
     <NavigationContainer>
       {isAuthenticated ? (
@@ -55,6 +54,7 @@ export default function NavigationWrapper() {
             name="Order"
             component={Order}
             options={{
+              tabBarBadge: order.length,
               tabBarIcon({ focused }) {
                 return (
                   <Icon

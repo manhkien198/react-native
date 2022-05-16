@@ -7,7 +7,6 @@ export default function Setting({ navigation }: any) {
 
   const handleLogout = () => {
     setIsAuthenticated(false);
-    navigation.navigate("Login");
   };
   return (
     <View>

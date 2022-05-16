@@ -4,6 +4,7 @@ export default React.createContext({
   order: [],
   isAuthenticated: false,
   products: [],
+  setIsAuthenticated: (payload: boolean) => {},
   addToCart: (product: Product) => {},
   removeFromCart: (id: string) => {},
   decreaseToCart: (product: Product) => {},
