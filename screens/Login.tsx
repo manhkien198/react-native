@@ -38,8 +38,12 @@ export default function Login({ navigation }: any) {
       .catch((err) => Alert.alert(err));
   };
   return (
-    <Formik initialValues={{ email: "", password: "" }} onSubmit={handleSubmit}>
-      {({ handleChange, handleSubmit, values, errors, isValid }) => (
+    <Formik
+      initialValues={{ email: "", password: "" }}
+      onSubmit={handleSubmit}
+      validationSchema={loginValidationSchema}
+    >
+      {({ handleChange, handleSubmit, values, errors, isValid, touched }) => (
         <SafeAreaView style={styles.container}>
           <TextInput
             style={styles.input}
@@ -49,7 +53,9 @@ export default function Login({ navigation }: any) {
             autoCapitalize="none"
             placeholder="Enter Email"
           />
-          {errors.email && <Text style={styles.errorText}>{errors.email}</Text>}
+          {errors.email && touched.email && (
+            <Text style={styles.errorText}>{errors.email}</Text>
+          )}
           <TextInput
             style={styles.input}
             onChangeText={handleChange("password")}
@@ -58,7 +64,7 @@ export default function Login({ navigation }: any) {
             autoCapitalize="none"
             placeholder="Enter Password"
           />
-          {errors.password && (
+          {errors.password && touched.password && (
             <Text style={styles.errorText}>{errors.password}</Text>
           )}
           <View style={styles.button}>
@@ -96,5 +102,6 @@ const styles = StyleSheet.create({
   errorText: {
     fontSize: 10,
     color: "red",
+    paddingHorizontal: 15,
   },
 });
